@@ -5,20 +5,22 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-import 'package:mercado_pago/mercado_object.dart';
-
-/*
- * Auth https://www.mercadopago.com/mpe/account/credentials
- */
 class MercadoPago {
-
   static const _base_url = 'https://api.mercadopago.com';
 
-  static const _public_key = 'TEST-98041829-8c47-4c6a-9c23-7b6e1855f31d';
-  static const _access_token = 'TEST-3029117202042245-103104-2fd0688859e43720378e5ed1043114f4__LC_LB__-182447115';
-  
-  static Future<MercadoObject> newUser({String firstname, String lastName, String email}) async {
-    final url = '$_base_url/v1/customers?access_token=$_access_token';
+  final MercadoCredentials _mercadoCredentials;
+
+  String get _publicKey => _mercadoCredentials.publicKey;
+  String get _accessToken => _mercadoCredentials.accessToken;
+
+  MercadoPago(this._mercadoCredentials);
+
+  Future<MercadoObject> newUser({
+    String firstname, 
+    String lastName, 
+    String email
+  }) async {
+    final url = '$_base_url/v1/customers?access_token=$_accessToken';
 
     var body = {
       'email': email,
@@ -34,17 +36,14 @@ class MercadoPago {
 
     if (response.statusCode == 201) {
       responseObject.isSuccessful = true;
-      responseObject.data = {
-        'id': jsonBody['id']
-      };
-    }
-    else {
+      responseObject.data = {'id': jsonBody['id']};
+    } else {
       int errorCode = int.tryParse(jsonBody["cause"][0]["code"]) ?? 404;
 
       if (errorCode == 101) {
         errorCode = 409;
       }
-      
+
       responseObject.isSuccessful = false;
       responseObject.errorCode = errorCode;
     }
@@ -52,7 +51,7 @@ class MercadoPago {
     return responseObject;
   }
 
-  static Future<MercadoObject> newCard({
+  Future<MercadoObject> newCard({
     String code,
     String year,
     int month,
@@ -60,7 +59,7 @@ class MercadoPago {
     String docNumber,
     String docType,
   }) async {
-    final url = '$_base_url/v1/card_tokens?public_key=$_public_key';
+    final url = '$_base_url/v1/card_tokens?public_key=$_publicKey';
 
     var body = {
       'security_code': code,
@@ -68,10 +67,7 @@ class MercadoPago {
       'expiration_month': month,
       'card_number': card,
       'cardholder': {
-        'identification': {
-          'number': docNumber,
-          'type': docType
-        },
+        'identification': {'number': docNumber, 'type': docType},
         'name': 'WIBO-CARD'
       }
     };
@@ -88,12 +84,29 @@ class MercadoPago {
         'id': jsonBody['id'],
         'key': jsonBody['public_key']
       };
-    }
-    else {
+    } else {
       responseObject.isSuccessful = false;
       responseObject.errorCode = 404;
     }
 
     return responseObject;
   }
+}
+
+class MercadoCredentials {
+  String publicKey;
+  String accessToken;
+
+  MercadoCredentials({this.publicKey, this.accessToken});
+}
+
+class MercadoObject {
+  bool isSuccessful;
+  Map data;
+  int errorCode;
+
+  MercadoObject({this.isSuccessful, this.data, this.errorCode});
+
+  @override
+  String toString() => data.toString();
 }
