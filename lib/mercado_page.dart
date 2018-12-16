@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-import 'mercado_object.dart';
+import 'model/mercado_object.dart';
 
 /*
  * Auth https://www.mercadopago.com/mpe/account/credentials

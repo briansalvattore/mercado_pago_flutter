@@ -1,7 +1,7 @@
 name: mercado_pago
 description: Mercado Pago Helper
-version: 0.0.1
-author: Brians Salvattore <briansalvattore@gmail.com>
+version: 0.0.2
+author: Brian Salvattore <briansalvattore@gmail.com>
 homepage: https://github.com/briansalvattore/mercado_pago_flutter
 
 environment:
