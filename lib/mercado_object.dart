@@ -1,3 +1,5 @@
+library mercado_pago;
+
 class MercadoObject {
 
   bool isSuccessful;

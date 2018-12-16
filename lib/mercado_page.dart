@@ -1,9 +1,11 @@
+library mercado_pago;
+
 import 'package:http/http.dart' as http;
 
 import 'dart:convert';
 import 'dart:async';
 
-import 'model/mercado_object.dart';
+import 'package:mercado_pago/mercado_object.dart';
 
 /*
  * Auth https://www.mercadopago.com/mpe/account/credentials
