@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mercado_pago/mercado_page.dart';
+import 'package:mercado_pago/mercado_pago.dart';
 
 void main() => runApp(new MyApp());
 

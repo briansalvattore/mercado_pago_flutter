@@ -58,6 +58,7 @@ class MercadoPago {
     String card,
     String docNumber,
     String docType,
+    String name,
   }) async {
     final url = '$_base_url/v1/card_tokens?public_key=$_publicKey';
 
@@ -68,7 +69,7 @@ class MercadoPago {
       'card_number': card,
       'cardholder': {
         'identification': {'number': docNumber, 'type': docType},
-        'name': 'WIBO-CARD'
+        'name': name
       }
     };
 
