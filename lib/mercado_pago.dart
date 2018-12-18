@@ -92,6 +92,55 @@ class MercadoPago {
 
     return responseObject;
   }
+
+  Future<MercadoObject> associateCardWithUser({
+    String user, 
+    String card
+  }) async {
+    final url = '$_base_url/v1/customers/$user/cards?access_token=$_accessToken';
+
+    var body = {
+      'token': card
+    };
+
+    var response = await http.post(url, body: json.encode(body));
+
+    var jsonBody = json.decode(response.body);
+
+    MercadoObject responseObject = MercadoObject();
+
+    if (response.statusCode == 201) {
+      responseObject.isSuccessful = true;
+      responseObject.data = {'id': jsonBody['id']};
+    } else {
+      responseObject.isSuccessful = false;
+      responseObject.errorCode = 404;
+    }
+
+    return responseObject;
+  }
+
+  Future<MercadoObject> getCardsFromUser({
+    String user
+  }) async {
+    final url = '$_base_url/v1/customers/$user/cards?access_token=$_accessToken';
+
+    var response = await http.get(url);
+
+    var jsonBody = json.decode(response.body);
+
+    MercadoObject responseObject = MercadoObject();
+
+    if (response.statusCode == 200) {
+      responseObject.isSuccessful = true;
+      responseObject.data = {'cards': jsonBody};
+    } else {
+      responseObject.isSuccessful = false;
+      responseObject.errorCode = 404;
+    }
+
+    return responseObject;
+  }
 }
 
 class MercadoCredentials {

@@ -27,14 +27,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   /*
   * Auth https://www.mercadopago.com/mpe/account/credentials
   */
   final credentials = MercadoCredentials(
       publicKey: 'TEST-98041829-8c47-4c6a-9c23-7b6e1855f31d',
-      accessToken: 'TEST-3029117202042245-103104-2fd0688859e43720378e5ed1043114f4__LC_LB__-182447115'
-    );
+      accessToken:
+          'TEST-3029117202042245-103104-2fd0688859e43720378e5ed1043114f4__LC_LB__-182447115');
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +47,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                MercadoPago(credentials).newUser(
+                MercadoPago(credentials)
+                    .newUser(
                         firstname: 'Brian',
                         lastName: 'Castillo',
-                        email: 'brian@castillo4.com')
+                        email: 'brian@castillo5.com')
                     .then((responseObject) {
                   if (responseObject.isSuccessful) {
                     print('user created with id = [ ${responseObject.data} ]');
@@ -65,7 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             RaisedButton(
               onPressed: () {
-                MercadoPago(credentials).newCard(
+                MercadoPago(credentials)
+                    .newCard(
                         code: '333',
                         year: '2020',
                         month: 9,
@@ -73,8 +74,26 @@ class _MyHomePageState extends State<MyHomePage> {
                         docNumber: '85695236',
                         docType: 'DNI')
                     .then((responseObject) {
-                      print("responseObject => $responseObject");
-                    });
+                  print("responseObject => $responseObject");
+                });
+              },
+              child: Text('New Card'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                /* MercadoPago(credentials)
+                    .associateCardWithUser(
+                        user: '387744186-Zw0inDybbSCugR',
+                        card: '453c47432aabcf01c7923c6a52060a17')
+                    .then((responseObject) {
+                  print("responseObject => $responseObject");
+                }); */
+
+                MercadoPago(credentials)
+                    .getCardsFromUser(user: '387744186-Zw0inDybbSCugR')
+                    .then((responseObject) {
+                  print("cards => ${responseObject.data}");
+                });
               },
               child: Text('New Card'),
             )
