@@ -89,10 +89,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   print("responseObject => $responseObject");
                 }); */
 
-                MercadoPago(credentials)
+                /* MercadoPago(credentials)
                     .getCardsFromUser(user: '387744186-Zw0inDybbSCugR')
                     .then((responseObject) {
                   print("cards => ${responseObject.data}");
+                }); */
+
+                MercadoPago(credentials)
+                    .tokenWithCard(
+                      code: '222',
+                      card: '1545133239176')
+                    .then((responseObject) {
+                  print("token => ${responseObject.data}");
                 });
               },
               child: Text('New Card'),

@@ -120,7 +120,7 @@ class MercadoPago {
     return responseObject;
   }
 
-  Future<MercadoObject> getCardsFromUser({
+  Future<MercadoObject> cardsFromUser({
     String user
   }) async {
     final url = '$_base_url/v1/customers/$user/cards?access_token=$_accessToken';
@@ -141,6 +141,75 @@ class MercadoPago {
 
     return responseObject;
   }
+
+  Future<MercadoObject> tokenWithCard({
+    String code, 
+    String card
+  }) async {
+    final url = '$_base_url/v1/card_tokens?public_key=$_publicKey';
+
+    var body = {
+      'security_code': code,
+      'cardId': card
+    };
+
+    var response = await http.post(url, body: json.encode(body));
+
+    var jsonBody = json.decode(response.body);
+
+    MercadoObject responseObject = MercadoObject();
+
+    if (response.statusCode == 201) {
+      responseObject.isSuccessful = true;
+      responseObject.data = {'id': jsonBody['id']};
+    } else {
+      responseObject.isSuccessful = false;
+      responseObject.errorCode = 404;
+    }
+
+    return responseObject;
+  }
+
+  Future<MercadoObject> createPayment({
+    double total, 
+    String cardToken,
+    String description,
+    String paymentId,
+    String userId,
+    String email
+  }) async {
+    final url = '$_base_url/v1/payments?access_token=$_accessToken';
+
+    var body = {
+      'transaction_amount': total,
+      'token': cardToken,
+      'description': description,
+      'installments': 1,
+      'payment_method_id': paymentId,
+      'payer': {
+        'id': userId,
+        'email': email
+      },
+    };
+
+    var response = await http.post(url, body: json.encode(body));
+
+    var jsonBody = json.decode(response.body);
+
+    MercadoObject responseObject = MercadoObject();
+
+    if (response.statusCode == 201) {
+      responseObject.isSuccessful = true;
+      responseObject.data = jsonBody;
+    } else {
+      responseObject.isSuccessful = false;
+      responseObject.errorCode = 404;
+    }
+
+    return responseObject;
+  }
+
+
 }
 
 class MercadoCredentials {
