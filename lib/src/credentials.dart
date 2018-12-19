@@ -1,6 +1,11 @@
+import 'package:meta/meta.dart' show required;
+
 class MercadoCredentials {
   String publicKey;
   String accessToken;
 
-  MercadoCredentials({this.publicKey, this.accessToken});
+  MercadoCredentials({
+    @required this.publicKey, 
+    @required this.accessToken
+  });
 }
