@@ -51,14 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     .newUser(
                         firstname: 'Brian',
                         lastName: 'Castillo',
-                        email: 'brian@castillo5.com')
+                        email: 'brian@castillo90.com')
                     .then((responseObject) {
-                  if (responseObject.isSuccessful) {
-                    print('user created with id = [ ${responseObject.data} ]');
-                  } else {
-                    print(
-                        'catchError with errorCode = [ ${responseObject.errorCode} ]');
-                  }
+                    print('user created with id = [ $responseObject ]');
                 });
               },
               child: Text('New User'),
@@ -89,19 +84,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   print("responseObject => $responseObject");
                 }); */
 
-                /* MercadoPago(credentials)
-                    .getCardsFromUser(user: '387744186-Zw0inDybbSCugR')
+                MercadoPago(credentials)
+                    .cardsFromUser(user: '387744186-Zw0inDybbSCugR')
                     .then((responseObject) {
                   print("cards => ${responseObject.data}");
-                }); */
+                });
 
-                MercadoPago(credentials)
+                /* MercadoPago(credentials)
                     .tokenWithCard(
                       code: '222',
                       card: '1545133239176')
                     .then((responseObject) {
                   print("token => ${responseObject.data}");
-                });
+                }); */
               },
               child: Text('New Card'),
             )
