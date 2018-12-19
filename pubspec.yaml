@@ -1,6 +1,6 @@
 name: mercado_pago
 description: Mercado Pago Helper
-version: 0.0.8
+version: 0.1.2
 author: Brian Salvattore <briansalvattore@gmail.com>
 homepage: https://github.com/briansalvattore/mercado_pago_flutter
 
@@ -16,6 +16,5 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 flutter:
