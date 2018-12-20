@@ -1,24 +1,29 @@
-import 'package:http/http.dart' as http;
-import 'package:meta/meta.dart' show required;
-
+// Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
+// is governed by the MIT license that can be found in the LICENSE file.
 import 'dart:convert';
 import 'dart:async';
+
+import 'package:flutter/foundation.dart' show required;
+import 'package:http/http.dart' as http;
 
 import 'credentials.dart';
 import 'model.dart';
 
-typedef RewriteResponse = Map Function(dynamic jsonBody);
-
+// Core of library
 class MercadoPago {
+
+  // base url
   static const _base_url = 'https://api.mercadopago.com';
 
   final MercadoCredentials _mercadoCredentials;
 
+  // getters of credentials
   String get _publicKey => _mercadoCredentials.publicKey;
   String get _accessToken => _mercadoCredentials.accessToken;
 
   MercadoPago(this._mercadoCredentials);
 
+  // same process of response
   Future<MercadoObject> _response(dynamic response, {int statusCode = 201, RewriteResponse rewriteResponse}) async {
 
     /// decode response
@@ -47,12 +52,14 @@ class MercadoPago {
     return responseObject;
   }
 
+  // http get without body
   Future<MercadoObject> _get(String url, {int statusCode = 201, RewriteResponse rewriteResponse}) async {
     var response = await http.get(url);
 
     return _response(response, statusCode: statusCode, rewriteResponse: rewriteResponse);
   }
 
+  // http post with body
   Future<MercadoObject> _post(String url, dynamic body, {int statusCode = 201, RewriteResponse rewriteResponse}) async {
     var response = await http.post(url, body: json.encode(body));
 
@@ -165,3 +172,5 @@ class MercadoPago {
     return await _post(url, body, rewriteResponse: (jsonBody) => jsonBody);
   }
 }
+
+typedef RewriteResponse = Map Function(dynamic jsonBody);

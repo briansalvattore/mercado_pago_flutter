@@ -1,6 +1,6 @@
 name: mercado_pago
-description: Mercado Pago Helper
-version: 0.1.2
+description: Mercado Pago Library - A flutter plugin to integrate MercadoPago into flutter app
+version: 0.1.2+1
 author: Brian Salvattore <briansalvattore@gmail.com>
 homepage: https://github.com/briansalvattore/mercado_pago_flutter
 
