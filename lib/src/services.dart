@@ -151,7 +151,7 @@ class MercadoPago {
     @required double total, 
     @required String cardToken,
     @required String description,
-    @required String paymentId,
+    @required String paymentMethod,
     @required String userId,
     @required String email
   }) async {
@@ -162,7 +162,7 @@ class MercadoPago {
       'token': cardToken,
       'description': description,
       'installments': 1,
-      'payment_method_id': paymentId,
+      'payment_method_id': paymentMethod,
       'payer': {
         'id': userId,
         'email': email

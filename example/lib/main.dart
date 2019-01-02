@@ -99,6 +99,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 }); */
               },
               child: Text('New Card'),
+            ),
+            
+            RaisedButton(
+              onPressed: () {
+                MercadoPago(credentials)
+                    .createPayment(
+                      total: 5.0,
+                      cardToken: '8f3e30ddbd518568d6db1ebca76719ae',
+                      description: 'Test pay',
+                      paymentMethod: 'visa',
+                      userId: '387451443-R0Ex7Ij6LdITGi',
+                      email: 'jperez1@asasas.com'
+                    )
+                    .then((responseObject) {
+                  print("payment => ${responseObject.data}");
+                });
+              },
+              child: Text('New pay'),
             )
           ],
         ),
