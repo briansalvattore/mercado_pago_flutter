@@ -42,7 +42,7 @@ class MercadoPago {
     
     /// if error
     if (response.statusCode != statusCode) {
-      int errorCode = int.tryParse(jsonBody["cause"][0]["code"]) ?? 404;
+      int errorCode = jsonBody["status"] ?? 404;
 
       responseObject.isSuccessful = false;
       responseObject.errorCode = errorCode;
