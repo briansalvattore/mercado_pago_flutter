@@ -2,8 +2,8 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 class MercadoObject {
   bool isSuccessful;
-  Map data;
-  int errorCode;
+  dynamic data;
+  String errorCode;
 
   MercadoObject({this.isSuccessful, this.data, this.errorCode});
 

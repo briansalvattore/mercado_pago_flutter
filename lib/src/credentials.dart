@@ -3,8 +3,8 @@
 import 'package:flutter/foundation.dart' show required;
 
 class MercadoCredentials {
-  String publicKey;
-  String accessToken;
+  final String publicKey;
+  final String accessToken;
 
   MercadoCredentials({
     @required this.publicKey, 

@@ -3,3 +3,9 @@
 * Create new user
 * Create new card
 * TODO: associate card with user
+
+## [1.0.5] - 27/04/2020
+
+* Fix typeInt
+* add unit test
+* Get document types
