@@ -9,3 +9,7 @@
 * Fix typeInt
 * add unit test
 * Get document types
+
+## [1.0.6] - 27/04/2020
+
+* Format code

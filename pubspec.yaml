@@ -1,6 +1,6 @@
 name: mercado_pago
 description: Mercado Pago Library - A flutter plugin to integrate MercadoPago into flutter app
-version: 1.0.5
+version: 1.0.6
 homepage: https://github.com/briansalvattore/mercado_pago_flutter
 
 environment:
