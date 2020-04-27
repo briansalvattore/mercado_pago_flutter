@@ -6,8 +6,5 @@ class MercadoCredentials {
   final String publicKey;
   final String accessToken;
 
-  MercadoCredentials({
-    @required this.publicKey, 
-    @required this.accessToken
-  });
+  MercadoCredentials({@required this.publicKey, @required this.accessToken});
 }

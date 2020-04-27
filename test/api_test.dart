@@ -46,7 +46,7 @@ void main() {
       card: '4009175332806176',
       documentNumber: '12345678',
       documentType: 'DNI',
-      fullName: 'APRO'
+      fullName: 'APRO',
     );
     print(response);
   });
@@ -80,7 +80,7 @@ void main() {
   });
 
   test('simple payment', () async {
-    String cardToken= 'ebcc4d445e845f052f702ed7015c4d57';
+    String cardToken = 'ebcc4d445e845f052f702ed7015c4d57';
     String userId = '555305508-i67KHqcUTewosJ';
     MercadoObject response = await mercadoPago.createPayment(
       total: 10.0,
@@ -92,6 +92,4 @@ void main() {
     );
     print(response);
   });
-
-
 }
