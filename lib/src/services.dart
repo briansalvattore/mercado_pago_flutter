@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:async';
 
-import 'package:flutter/foundation.dart' show required;
 import 'package:http/http.dart' as http;
 
 import 'credentials.dart';
@@ -54,7 +53,7 @@ class MercadoPago {
     String url, {
     int customSuccessCode = 201,
   }) async {
-    var response = await http.get(url);
+    var response = await http.get(Uri.parse(url));
 
     return _response(response, customSuccessCode: customSuccessCode);
   }
@@ -65,7 +64,7 @@ class MercadoPago {
     dynamic body, {
     int customSuccessCode = 201,
   }) async {
-    var response = await http.post(url, body: json.encode(body));
+    var response = await http.post(Uri.parse(url), body: json.encode(body));
 
     return _response(response, customSuccessCode: customSuccessCode);
   }
@@ -77,11 +76,11 @@ class MercadoPago {
   }
 
   Future<MercadoObject> newUser({
-    @required String firstname,
-    @required String lastName,
-    @required String email,
-    @required String documentType,
-    @required String documentNumber,
+    required String firstname,
+    required String lastName,
+    required String email,
+    required String documentType,
+    required String documentNumber,
   }) async {
     final url = '$_base_url/v1/customers?access_token=$_accessToken';
 
@@ -105,13 +104,13 @@ class MercadoPago {
   }
 
   Future<MercadoObject> newCard({
-    @required String code,
-    @required String year,
-    @required int month,
-    @required String card,
-    @required String documentType,
-    @required String documentNumber,
-    @required String fullName,
+    required String code,
+    required String year,
+    required int month,
+    required String card,
+    required String documentType,
+    required String documentNumber,
+    required String fullName,
   }) async {
     final url = '$_base_url/v1/card_tokens?public_key=$_publicKey';
 
@@ -133,8 +132,8 @@ class MercadoPago {
   }
 
   Future<MercadoObject> associateCardWithUser({
-    @required String user,
-    @required String card,
+    required String user,
+    required String card,
   }) async {
     final url =
         '$_base_url/v1/customers/$user/cards?access_token=$_accessToken';
@@ -144,9 +143,7 @@ class MercadoPago {
     return await _post(url, body);
   }
 
-  Future<MercadoObject> cardsFromUser({
-    @required String user,
-  }) async {
+  Future<MercadoObject> cardsFromUser({required String user}) async {
     final url =
         '$_base_url/v1/customers/$user/cards?access_token=$_accessToken';
 
@@ -154,8 +151,8 @@ class MercadoPago {
   }
 
   Future<MercadoObject> tokenWithCard({
-    @required String code,
-    @required String card,
+    required String code,
+    required String card,
   }) async {
     final url = '$_base_url/v1/card_tokens?public_key=$_publicKey';
 
@@ -165,12 +162,12 @@ class MercadoPago {
   }
 
   Future<MercadoObject> createPayment({
-    @required double total,
-    @required String cardToken,
-    @required String description,
-    @required String paymentMethod,
-    @required String userId,
-    @required String email,
+    required double total,
+    required String cardToken,
+    required String description,
+    required String paymentMethod,
+    required String userId,
+    required String email,
   }) async {
     final url = '$_base_url/v1/payments?access_token=$_accessToken';
 
